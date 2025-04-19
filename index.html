@@ -1,25 +1,41 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>正在为您跳转下载...</title>
+  <title>跳转中...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    window.onload = function () {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-
-      if (/android/i.test(ua)) {
-        window.location.href = "https://play.google.com/store/apps/details?id=ava.ai";
-      } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        window.location.href = "https://apps.apple.com/us/app/ai-avatarpop/id6742176370";
-      } else {
-        document.getElementById("msg").innerText = "请使用手机浏览器打开此页面以下载 App。";
-      }
-    };
-  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+  </style>
 </head>
 <body>
   <p id="msg">正在跳转，请稍候...</p>
+
+  <script>
+    function redirect() {
+      const ua = navigator.userAgent.toLowerCase();
+      let url = '';
+
+      if (/android/.test(ua)) {
+        url = "https://play.google.com/store/apps/details?id=ava.ai";
+      } else if (/iphone|ipad|ipod/.test(ua)) {
+        url = "https://apps.apple.com/us/app/ai-avatarpop/id6742176370";
+      } else {
+        document.getElementById("msg").innerText = "请使用手机打开本页面下载 App。";
+        return;
+      }
+
+      // 延迟一点点让页面先渲染（避免某些浏览器拦截）
+      setTimeout(() => {
+        window.location.href = url;
+      }, 500);
+    }
+
+    window.onload = redirect;
+  </script>
 </body>
 </html>
