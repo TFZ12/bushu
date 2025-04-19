@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>正在为您跳转下载...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    window.onload = function () {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/android/i.test(ua)) {
+        window.location.href = "https://play.google.com/store/apps/details?id=ava.ai";
+      } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        window.location.href = "https://apps.apple.com/us/app/ai-avatarpop/id6742176370";
+      } else {
+        document.getElementById("msg").innerText = "请使用手机浏览器打开此页面以下载 App。";
+      }
+    };
+  </script>
+</head>
+<body>
+  <p id="msg">正在跳转，请稍候...</p>
+</body>
+</html>
